@@ -5,6 +5,7 @@
 <script lang="ts">
   import { onDestroy, onMount, tick } from "svelte";
   import { MOBILE_BP, TABLET_BP } from "../../common/breakpoints";
+  import { setCurrentUrl } from "../../common/urls";
 
   // optional
   export let heading: string = "";
@@ -42,7 +43,7 @@
 
   onMount(() => {
     window.addEventListener("popstate", onRouteChange, true);
-    setCurrentLink();
+    setCurrentUrl(_slotParentEl);
   });
 
   onDestroy(() => {
@@ -50,32 +51,8 @@
   });
 
   function onRouteChange() {
-    setCurrentLink();
+    setCurrentUrl(_slotParentEl);
     hideMenu();
-  }
-
-  // Update component if the current browser url matches one of this element's child links
-  function setCurrentLink() {
-    if (!_slotParentEl) return;
-
-    const slot = _slotParentEl.querySelector("slot") as HTMLSlotElement;
-    if (!slot) return;
-
-    const link = slot
-      .assignedElements()
-      .filter((el) => el.tagName === "A")
-      .map((el) => {
-        el.classList.remove("current");
-        return el;
-      })
-      .find((el) => {
-        const href = (el as HTMLLinkElement).href;
-        const url = `${window.location.pathname}${window.location.search}${window.location.hash}`;
-        return href.endsWith(url);
-      });
-    if (link) {
-      link.classList.add("current");
-    }
   }
 
   // *Menu* children count
