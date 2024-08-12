@@ -107,6 +107,7 @@
   }
 
   button {
+    box-shadow: rgba(0, 0, 0, 0.3) 0 1px 3px;
     display: inline-flex;
     box-sizing: border-box;
     border-radius: 0.25rem;
@@ -126,10 +127,15 @@
     gap: 0.5rem;
     align-items: center;
     justify-content: center;
-    transition:
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    button {
+      transition:
       transform 0.1s ease-in-out,
       background-color 0.2s ease-in-out,
-      border-color 0.2s ease-in-out;  
+      border-color 0.2s ease-in-out;
+    }
   }
   button:disabled {
     pointer-events: none;

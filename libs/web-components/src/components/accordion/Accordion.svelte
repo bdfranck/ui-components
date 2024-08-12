@@ -267,4 +267,10 @@
       align-items: center;
     }
   }
+
+  @media (prefers-reduced-motion: no-preference) {
+    details goa-icon {
+      transition: transform 200ms ease;
+    }
+  }
 </style>

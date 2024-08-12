@@ -5,7 +5,6 @@
 </script>
 
 <div class="root">
-
   <a href="#" class="item"><goa-icon type="list"></goa-icon></a>
   <a href="#" class="item active"><goa-icon type="person-add" theme="filled"></goa-icon></a>
   <a href="#" class="item"><goa-icon type="person"></goa-icon></a>
@@ -40,9 +39,4 @@
   .item:hover {
     background-color: #CEDFEE;
   }
-
-  .item goa-icon {
-
-  }
-
 </style>

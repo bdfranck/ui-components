@@ -135,7 +135,13 @@
   }
 
   goa-icon {
-    /* transition: transform 80ms ease; */
     position: absolute;
   }
+
+@media (prefers-reduced-motion: no-preference) {
+  goa-icon {
+    transition: transform 200ms ease;
+  }
+}
+
 </style>
