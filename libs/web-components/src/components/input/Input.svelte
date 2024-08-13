@@ -310,7 +310,7 @@
   .goa-input {
     box-sizing: border-box;
     outline: none;
-    transition: box-shadow 0.1s ease-in;
+    transition: box-shadow 100ms ease-in;
     border: 1px solid var(--goa-color-greyscale-700);
     border-radius: var(--goa-border-radius-m);
     display: inline-flex;

@@ -96,7 +96,7 @@
   :host:focus-visible {
     outline: none !important;
   }
-  
+
   button {
     display: inline-flex;
     align-items: center;
@@ -134,6 +134,11 @@
     background-color: transparent;
   }
 
+  @media (prefers-reduced-motion) {
+    button:active {
+      transform: none;
+    }
+  }
 
   .color {
     color: var(--goa-color-interactive-default);
@@ -199,7 +204,7 @@
     background-color: var(--goa-color-greyscale-700);
   }
 
-  
+
   .inverted {
     color: var(--goa-color-greyscale-white);
     fill: var(--goa-color-greyscale-white);

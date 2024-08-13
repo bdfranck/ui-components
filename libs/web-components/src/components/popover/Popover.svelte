@@ -53,7 +53,7 @@
 
   // additional horizontal offset that is added to popover's position
   export let hoffset = "";
- 
+
   // width of outline seen when focused
   export let focusborderwidth = "var(--goa-border-width-l)";
 
@@ -315,6 +315,31 @@
     margin-bottom: var(--offset-bottom, 3px);
     margin-left: var(--offset-left, 0);
     margin-right: var(--offset-right, 0);
+    animation: popover-enter 100ms ease;
+  }
+
+  @keyframes popover-enter {
+    0% {
+      opacity: 0;
+      transform: translateY(-0.25rem);
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion) {
+    @keyframes popover-enter {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
   }
 
   :global(::slotted(ul)) {

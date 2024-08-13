@@ -134,8 +134,23 @@
     margin-bottom: 0 !important;
   }
 
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
   goa-icon {
-    /* transition: transform 80ms ease; */
+    transition: transform 100ms ease;
     position: absolute;
+  }
+
+  @media (prefers-reduced-motion) {
+    goa-icon {
+      transition: none;
+    }
   }
 </style>

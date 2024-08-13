@@ -243,7 +243,7 @@
       : { name, value: newValue };
 
     if (!_isDirty) {
-      return;  
+      return;
     }
 
     setTimeout(() => {
@@ -263,7 +263,7 @@
 
     _isDirty = option.value !== _selectedOption?.value;
     _selectedOption = option;
-  
+
     if (!_native) {
       hideMenu();
       syncFilteredOptions();
@@ -292,7 +292,7 @@
       _selectedOption = undefined;
       setDisplayedValue();
       dispatchValue("");
-    }  
+    }
   }
 
   function onInputKeyUp(e: KeyboardEvent) {
@@ -692,7 +692,7 @@
   .dropdown-input-group {
     box-sizing: border-box;
     outline: none;
-    transition: box-shadow 0.1s ease-in;
+    transition: box-shadow 100ms ease-in;
     border: 1px solid var(--goa-color-greyscale-700);
     border-radius: var(--goa-border-radius-m);
     display: inline-flex;
@@ -824,7 +824,13 @@
     border: 1px solid var(--goa-color-greyscale-700);
     border-radius: var(--goa-border-radius-m);
     background-color: var(--goa-color-greyscale-white);
-    transition: box-shadow 0.1s ease-in;
+    transition: box-shadow 100ms ease-in;
+  }
+
+  @media (prefers-reduced-motion) {
+    .dropdown-native {
+      transition: none;
+    }
   }
 
   .dropdown-native:has(select:disabled) {

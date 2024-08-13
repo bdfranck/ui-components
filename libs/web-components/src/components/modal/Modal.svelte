@@ -40,6 +40,7 @@
   let _isOpen: boolean = false;
   let _requiresTopPadding: boolean;
   let _actionsHeight: number;
+  let _prefersReducedMotion: boolean = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // Type verification
   const [CALLOUT_VARIANT, validateCalloutVariant] = typeValidator(
@@ -85,7 +86,7 @@
   }
 
   $: _transitionTime =
-    transition === "none" ? 0 : transition === "slow" ? 400 : 200;
+    transition === "none" || _prefersReducedMotion ? 0 : transition === "slow" ? 400 : 200;
 
   $: _iconType =
     calloutvariant === "emergency"

@@ -244,7 +244,7 @@
     position: absolute;
     z-index: 2;
     opacity: 0;
-    transition: opacity 0.3s;
+    transition: opacity 300ms;
     padding: var(--goa-space-xs) var(--goa-space-m);
     text-align: left;
     white-space: nowrap;

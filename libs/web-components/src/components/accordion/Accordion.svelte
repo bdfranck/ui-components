@@ -233,6 +233,16 @@
     margin-bottom: 0 !important;
   }
 
+  details goa-icon {
+    transition: transform 100ms ease;
+  }
+
+  @media (prefers-reduced-motion) {
+    details goa-icon {
+      transition: none;
+    }
+  }
+
   details[open] goa-icon {
     transform: rotate(90deg);
   }

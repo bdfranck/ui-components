@@ -97,7 +97,7 @@
   #container {
     container: self / inline-size;
   }
-  
+
   .notification {
     padding: var(--goa-space-l) var(--goa-space-m);
     display: flex;
@@ -179,6 +179,12 @@
   }
   .close button:active {
     transform: translateY(2px);
+  }
+
+  @media (prefers-reduced-motion) {
+    .close button {
+      transform: none;
+    }
   }
 
   /*Information & Event Close Button*/

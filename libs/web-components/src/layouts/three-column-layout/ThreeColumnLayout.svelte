@@ -73,6 +73,11 @@
     transition: transform 200ms ease-in-out;
     background-color: var(--goa-color-greyscale-white);
   }
+  @media (prefers-reduced-motion) {
+    .nav {
+      transition: none;
+    }
+  }
 
   .nav > * {
     display: block;

@@ -127,9 +127,9 @@
     align-items: center;
     justify-content: center;
     transition:
-      transform 0.1s ease-in-out,
-      background-color 0.2s ease-in-out,
-      border-color 0.2s ease-in-out;  
+      transform 100ms ease-in-out,
+      background-color 200ms ease-in-out,
+      border-color 200ms ease-in-out;
   }
   button:disabled {
     pointer-events: none;
@@ -149,6 +149,12 @@
     button {
       width: 100%;
       display: flex;
+    }
+  }
+
+  @media (prefers-reduced-motion) {
+    button:active {
+      transform: none;
     }
   }
 
