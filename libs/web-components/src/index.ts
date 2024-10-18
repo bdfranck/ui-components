@@ -71,3 +71,4 @@ export { default as TextArea } from "./components/text-area/TextArea.svelte";
 export { default as ThreeColumnLayout } from "./layouts/three-column-layout/ThreeColumnLayout.svelte";
 export { default as Tooltip } from "./components/tooltip/Tooltip.svelte";
 export { default as TwoColumnLayout } from "./layouts/two-column-layout/TwoColumnLayout.svelte";
+export { default as WorkSideMenu } from "./components/work-side-menu/WorkSideMenu.svelte";
