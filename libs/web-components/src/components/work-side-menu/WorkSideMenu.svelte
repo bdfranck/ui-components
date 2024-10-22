@@ -154,23 +154,14 @@ TO DO:
       <span>Settings</span>
     </a>
     <goa-popover relative="true" position="above">
-      <a href="#support">
-        <goa-icon size="small" type="help-circle" />
-        <span>Support</span>
-      </a>
-      <a href="#settings">
-        <goa-icon size="small"  type="settings" />
-        <span>Settings</span>
-      </a>
-      <div slot="target">
-        <div class="account-menu">
-          <div class="user-image"></div>
-          <div class="account-name">
-            <div class="user-name">Edna Mode</div>
-            <div class="user-email">edna.mode@example.com</div>
-          </div>
-          <goa-icon size="small" type="chevron-up"/>
+      This is a user menu.
+      <div slot="target" class="account-menu">
+        <div class="user-image"></div>
+        <div class="account-name">
+          <div class="user-name">Edna Mode</div>
+          <div class="user-email">edna.mode@example.com</div>
         </div>
+        <goa-icon size="small" type="chevron-up"/>
       </div>
     </goa-popover>
     <div class="toggle">
@@ -245,14 +236,20 @@ TO DO:
     gap: 8px;
   }
 
-  .side-menu.open .main-menu,
-  .side-menu.open .secondary-menu {
+  .side-menu.open .main-menu {
     padding: 12px;
+  }
+
+  .side-menu.open .secondary-menu {
+    padding: 12px 0;
+    margin: 0 12px;
+    position: relative;
   }
 
   .side-menu.closed .main-menu,
   .side-menu.closed .secondary-menu {
     padding: 8px;
+    margin: 0;
   }
 
   .main-menu {
@@ -269,11 +266,15 @@ TO DO:
     background-color: #fff;
     border-radius: 8px;
     position: absolute;
-    right: -16px;
-    top: -48px;
+    right: -28px;
+    top: -88px;
     height: 28px;
     border: 0.5px solid var(--Color-Greyscale-200, rgba(220, 220, 220, 1));
     box-shadow: 0px 1px 0px 0px rgba(26, 26, 26, 0.25);
+  }
+
+  .side-menu.closed .toggle {
+    right: -16px;
   }
 
   .user-image {
