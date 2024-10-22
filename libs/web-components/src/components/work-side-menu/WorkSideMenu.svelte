@@ -1,5 +1,11 @@
 <svelte:options customElement="goa-work-side-menu" />
 
+<!--
+TO DO:
+- Swap out icon button for toggle
+- Explore how it works with a layout
+-->
+
 <script lang="ts">
   import { onDestroy, onMount, tick } from "svelte";
   import { getSlottedChildren } from "../../common/utils";
@@ -25,6 +31,7 @@
     await tick();
     getChildren();
     addEventListeners();
+    setCurrentUrl();
   });
 
   onDestroy(() => {
@@ -43,7 +50,7 @@
     if (slotChildren.length === 0) return;
 
     _sideMenuLinks = slotChildren
-      .filter((el) => el.tagName === "link-button")
+      .filter((el) => el.tagName === "A")
       .map((el) => {
         el.classList.remove("current");
         return el;
@@ -117,7 +124,7 @@
   }
 </script>
 
-<div bind:this={_rootEl} class="side-menu" data-testid={testid} class:open={_open} class:closed={!_open}>
+<div class="side-menu" data-testid={testid} class:open={_open} class:closed={!_open}>
   <div class="heading">
     <svg id="svg-ab-logo" width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g clip-path="url(#clip0_4514_103448)">
@@ -132,7 +139,8 @@
     </svg>
     <h1>{heading}</h1>
   </div>
-  <div class="main-menu">
+
+  <div bind:this={_rootEl} class="main-menu">
     <slot />
   </div>
 
@@ -145,14 +153,26 @@
       <goa-icon size="small"  type="settings" />
       <span>Settings</span>
     </a>
-    <div class="account-menu">
-      <div class="user-image"></div>
-      <div class="account-name">
-        <div class="user-name">Edna Mode</div>
-        <div class="user-email">edna.mode@example.com</div>
+    <goa-popover relative="true" position="above">
+      <a href="#support">
+        <goa-icon size="small" type="help-circle" />
+        <span>Support</span>
+      </a>
+      <a href="#settings">
+        <goa-icon size="small"  type="settings" />
+        <span>Settings</span>
+      </a>
+      <div slot="target">
+        <div class="account-menu">
+          <div class="user-image"></div>
+          <div class="account-name">
+            <div class="user-name">Edna Mode</div>
+            <div class="user-email">edna.mode@example.com</div>
+          </div>
+          <goa-icon size="small" type="chevron-up"/>
+        </div>
       </div>
-      <goa-icon type="chevron-up"/>
-    </div>
+    </goa-popover>
     <div class="toggle">
       <goa-icon-button variant="color" size="small" icon={_open ? "chevron-back" : "chevron-forward"} onclick={handleToggleClick}></goa-icon-button>
     </div>
@@ -251,6 +271,7 @@
     position: absolute;
     right: -16px;
     top: -48px;
+    height: 28px;
     border: 0.5px solid var(--Color-Greyscale-200, rgba(220, 220, 220, 1));
     box-shadow: 0px 1px 0px 0px rgba(26, 26, 26, 0.25);
   }
