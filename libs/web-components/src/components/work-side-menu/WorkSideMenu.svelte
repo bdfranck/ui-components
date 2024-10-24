@@ -1,130 +1,20 @@
 <svelte:options customElement="goa-work-side-menu" />
 
-<!--
-TO DO:
-- Swap out icon button for toggle
-- Explore how it works with a layout
--->
-
 <script lang="ts">
-  import { onDestroy, onMount, tick } from "svelte";
-  import { getSlottedChildren } from "../../common/utils";
-  import { isUrlMatch, getMatchedLink } from "../../common/urls";
-  import { SideMenuGroupProps } from "../side-menu-group/SideMenuGroup.svelte";
 
   export let heading: string;
   export let testid: string = "";
 
   let _open = true;
 
-  let _rootEl: HTMLElement;
-  let _sideMenuLinks: Element[] = [];
-  let _sideMenuGroupItems: SideMenuGroupProps[] = [];
-  let observer: MutationObserver | null = null;
-
   function handleToggleClick(e: Event) {
     _open = !_open;
     e.preventDefault();
   }
 
-  onMount(async () => {
-    await tick();
-    getChildren();
-    addEventListeners();
-    setCurrentUrl();
-  });
-
-  onDestroy(() => {
-    removeEventListeners();
-  });
-
-  let noop = function() {
-
-  };
-
-  function getChildren() {
-    if (!_rootEl) return;
-
-    const slotChildren = getSlottedChildren(_rootEl);
-
-    if (slotChildren.length === 0) return;
-
-    _sideMenuLinks = slotChildren
-      .filter((el) => el.tagName === "A")
-      .map((el) => {
-        el.classList.remove("current");
-        return el;
-      });
-
-    _rootEl.addEventListener("sidemenugroup:mounted", handleSideMenuGroupMount);
-  }
-
-  function handleSideMenuGroupMount(e: Event) {
-    const sideMenuGroupProps = (e as CustomEvent<SideMenuGroupProps>).detail;
-    _sideMenuGroupItems = [..._sideMenuGroupItems, sideMenuGroupProps];
-    setCurrentUrl();
-  }
-
-  function setCurrentUrl() {
-    const url = `${window.location.pathname}${window.location.search}${window.location.hash}`;
-
-    // check all links under SideMenu and SideMenuGroups
-    let links = [..._sideMenuLinks];
-    _sideMenuGroupItems.forEach((el) => {
-      links = [...links, ...el.links];
-    });
-
-    links.forEach((link) => link.classList.remove("current"));
-
-    const currentEl = getMatchedLink(links, window.location);
-    currentEl?.classList.add("current");
-
-    // even nothing is matched, we should inform side menu group to close and remove current
-    dispatchCurrentUrl(currentEl?.getAttribute("href") || "");
-  }
-
-  function dispatchCurrentUrl(href: string) {
-    _sideMenuGroupItems.forEach((item) => {
-      item.el.dispatchEvent(
-        new CustomEvent("sidemenu:current:change", {
-          composed: true,
-          detail: href,
-        }),
-      );
-    });
-  }
-
-  function addEventListeners() {
-    // watch path changes
-    let currentLocation = document.location.href;
-    observer = new MutationObserver((_mutationList) => {
-      if (isUrlMatch(document.location, currentLocation)) {
-        currentLocation = document.location.href;
-        setCurrentUrl();
-      }
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    // watch hash / browser history changes
-    window.addEventListener("popstate", setCurrentUrl);
-  }
-
-  function removeEventListeners() {
-    if (observer) {
-      observer.disconnect();
-      observer = null;
-    }
-    window.removeEventListener("popstate", setCurrentUrl);
-    if (_rootEl) {
-      _rootEl.removeEventListener(
-        "sidemenugroup:mounted",
-        handleSideMenuGroupMount,
-      );
-    }
-  }
 </script>
 
-<div class="side-menu" data-testid={testid} class:open={_open} class:closed={!_open}>
+<div class="side-menu" class:open={_open} class:closed={!_open}>
   <div class="heading">
     <svg id="svg-ab-logo" width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g clip-path="url(#clip0_4514_103448)">
@@ -140,34 +30,141 @@ TO DO:
     <h1>{heading}</h1>
   </div>
 
-  <div bind:this={_rootEl} class="main-menu">
-    <slot />
-  </div>
+  <nav class="main-menu">
+    <ul>
+      <li>
+        <a class="menu-item current" href="#search">
+          <goa-icon size="small" type="search" />
+          <span>Search</span>
+        </a>
+        <ul class="sub-menu">
+          <li>
+            <a class="sub-menu-item" href="#schedule">
+              <goa-icon size="small"  type="calendar" />
+              <span>Schedule</span>
+            </a>
+          </li>
+          <li>
+            <a class="sub-menu-item" href="#schedule">
+              <goa-icon size="small"  type="calendar" />
+              <span>Schedule</span>
+            </a>
+          </li>
+          <li>
+            <a class="sub-menu-item" href="#schedule">
+              <goa-icon size="small"  type="calendar" />
+              <span>Schedule</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a class="menu-item" href="#clients">
+          <goa-icon size="small"  type="list" />
+          <span>Clients</span>
+        </a>
+      </li>
+      <li>
+        <a class="menu-item" href="#schedule">
+          <goa-icon size="small"  type="calendar" />
+          <span>Schedule</span>
+        </a>
+      </li>
+      <li>
+        <a class="menu-item" href="#">
+          <goa-icon size="small"  type="calendar" />
+          <span>Menu item</span>
+        </a>
+      </li>
+      <li>
+        <a class="menu-item" href="#">
+          <goa-icon size="small"  type="calendar" />
+          <span>Menu item</span>
+        </a>
+      </li>
+      <li>
+        <a class="menu-item" href="#">
+          <goa-icon size="small"  type="calendar" />
+          <span>Menu item</span>
+        </a>
+      </li>
+      <li>
+        <a class="menu-item" href="#">
+          <goa-icon size="small"  type="calendar" />
+          <span>Menu item</span>
+        </a>
+      </li>
+      <li>
+        <a class="menu-item" href="#">
+          <goa-icon size="small"  type="calendar" />
+          <span>Menu item</span>
+        </a>
+      </li>
+      <li>
+        <a class="menu-item" href="#">
+          <goa-icon size="small"  type="calendar" />
+          <span>Menu item</span>
+        </a>
+      </li>
+      <li>
+        <a class="menu-item" href="#">
+          <goa-icon size="small"  type="calendar" />
+          <span>Menu item</span>
+        </a>
+      </li>
+      <li>
+        <a class="menu-item" href="#">
+          <goa-icon size="small"  type="calendar" />
+          <span>Menu item</span>
+        </a>
+      </li>
+      <li>
+        <a class="menu-item" href="#">
+          <goa-icon size="small"  type="calendar" />
+          <span>Menu item</span>
+        </a>
+      </li>
+      <li>
+        <a class="menu-item" href="#">
+          <goa-icon size="small"  type="calendar" />
+          <span>Menu item</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
 
-  <div class="secondary-menu">
-    <a href="#support">
-      <goa-icon size="small" type="help-circle" />
-      <span>Support</span>
-    </a>
-    <a href="#settings">
-      <goa-icon size="small"  type="settings" />
-      <span>Settings</span>
-    </a>
-    <goa-popover relative="true" position="above">
-      This is a user menu.
-      <div slot="target" class="account-menu">
-        <div class="user-image"></div>
-        <div class="account-name">
-          <div class="user-name">Edna Mode</div>
-          <div class="user-email">edna.mode@example.com</div>
-        </div>
-        <goa-icon size="small" type="chevron-up"/>
-      </div>
-    </goa-popover>
+  <nav class="secondary-menu">
+    <ul>
+      <li>
+        <a class="menu-item" href="#support">
+          <goa-icon size="small" type="help-circle" />
+          <span>Support</span>
+        </a>
+      </li>
+      <li>
+        <a class="menu-item" href="#settings">
+          <goa-icon size="small"  type="settings" />
+          <span>Settings</span>
+        </a>
+      </li>
+      <li>
+        <goa-popover relative="true" position="above">
+          This is a user menu.
+          <div slot="target" class="account-menu">
+            <div class="user-image"></div>
+            <div class="account-name">
+              <div class="user-name">Edna Mode</div>
+              <div class="user-email">edna.mode@example.com</div>
+            </div>
+            <goa-icon size="small" type="chevron-up"/>
+          </div>
+        </goa-popover>
+      </li>
+    </ul>
     <div class="toggle">
       <goa-icon-button variant="color" size="small" icon={_open ? "chevron-back" : "chevron-forward"} onclick={handleToggleClick}></goa-icon-button>
     </div>
-  </div>
+  </nav>
 </div>
 
 <style>
@@ -178,7 +175,12 @@ TO DO:
     border-right: 1px solid var(--goa-color-greyscale-200);
     box-shadow: 0px 4px 6px -2px rgba(26, 26, 26, 0.2);
     height: 100vh;
-    /* transition: width 33ms ease; */
+  }
+
+  nav ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
   }
 
   .side-menu.closed a>span,
@@ -227,6 +229,11 @@ TO DO:
     line-height: 1.2;
     font-weight: 600;
     margin: 0;
+  }
+
+  .main-menu {
+    flex-shrink: 1;
+    overflow-y: auto;
   }
 
   .main-menu,
@@ -316,9 +323,8 @@ TO DO:
     color: var(--goa-color-text-secondary);
   }
 
-  .secondary-menu a,
-  :global(::slotted(a)),
-  :global(::slotted(a:visited)) {
+  .menu-item,
+  .sub-menu-item {
     /* required to override base styles */
     color: var(--goa-color-text-default) !important;
     font-size: 14px !important;
@@ -329,25 +335,28 @@ TO DO:
     text-decoration: none;
   }
 
-  .side-menu.closed .secondary-menu a,
-  .side-menu.closed :global(::slotted(a)) {
+  .side-menu.closed .menu-item {
     padding-left: 6px;
   }
 
-  .secondary-menu a.current,
-  :global(::slotted(a.current)) {
+  .menu-item.current {
     font-weight: bold;
     background: var(--goa-color-greyscale-100);
     border-radius: 8px;
   }
 
-  .secondary-menu a:hover:not(.current),
-  :global(::slotted(a:hover:not(.current))) {
+  .menu-item:hover:not(.current) {
     background: var(--goa-color-greyscale-100);
     border-radius: 8px;
   }
 
-  :global(::slotted(a:focus-visible)) {
+  .menu-item:focus-visible {
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+  }
+
+  .sub-menu {
+    border-left: 4px solid var(--goa-color-greyscale-100);
+    margin-left: 20px;
+    margin-top: 2px;
   }
 </style>
