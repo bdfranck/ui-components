@@ -27,140 +27,63 @@
         </clipPath>
       </defs>
     </svg>
-    <h1>{heading}</h1>
+    <h1 class="title">{heading}</h1>
   </div>
 
   <nav class="main-menu">
-    <ul>
-      <li>
-        <a class="menu-item current" href="#search">
-          <goa-icon size="small" type="search" />
-          <span>Search</span>
-        </a>
-        <ul class="sub-menu">
-          <li>
-            <a class="sub-menu-item" href="#schedule">
-              <goa-icon size="small"  type="calendar" />
-              <span>Schedule</span>
-            </a>
-          </li>
-          <li>
-            <a class="sub-menu-item" href="#schedule">
-              <goa-icon size="small"  type="calendar" />
-              <span>Schedule</span>
-            </a>
-          </li>
-          <li>
-            <a class="sub-menu-item" href="#schedule">
-              <goa-icon size="small"  type="calendar" />
-              <span>Schedule</span>
-            </a>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <a class="menu-item" href="#clients">
-          <goa-icon size="small"  type="list" />
-          <span>Clients</span>
-        </a>
-      </li>
-      <li>
-        <a class="menu-item" href="#schedule">
-          <goa-icon size="small"  type="calendar" />
-          <span>Schedule</span>
-        </a>
-      </li>
-      <li>
-        <a class="menu-item" href="#">
-          <goa-icon size="small"  type="calendar" />
-          <span>Menu item</span>
-        </a>
-      </li>
-      <li>
-        <a class="menu-item" href="#">
-          <goa-icon size="small"  type="calendar" />
-          <span>Menu item</span>
-        </a>
-      </li>
-      <li>
-        <a class="menu-item" href="#">
-          <goa-icon size="small"  type="calendar" />
-          <span>Menu item</span>
-        </a>
-      </li>
-      <li>
-        <a class="menu-item" href="#">
-          <goa-icon size="small"  type="calendar" />
-          <span>Menu item</span>
-        </a>
-      </li>
-      <li>
-        <a class="menu-item" href="#">
-          <goa-icon size="small"  type="calendar" />
-          <span>Menu item</span>
-        </a>
-      </li>
-      <li>
-        <a class="menu-item" href="#">
-          <goa-icon size="small"  type="calendar" />
-          <span>Menu item</span>
-        </a>
-      </li>
-      <li>
-        <a class="menu-item" href="#">
-          <goa-icon size="small"  type="calendar" />
-          <span>Menu item</span>
-        </a>
-      </li>
-      <li>
-        <a class="menu-item" href="#">
-          <goa-icon size="small"  type="calendar" />
-          <span>Menu item</span>
-        </a>
-      </li>
-      <li>
-        <a class="menu-item" href="#">
-          <goa-icon size="small"  type="calendar" />
-          <span>Menu item</span>
-        </a>
-      </li>
-      <li>
-        <a class="menu-item" href="#">
-          <goa-icon size="small"  type="calendar" />
-          <span>Menu item</span>
-        </a>
-      </li>
-    </ul>
+    <a class="menu-item current" href="#search">
+      <goa-icon size="small" type="search" />
+      <span>Search</span>
+    </a>
+    <div class="sub-menu">
+      <a class="sub-menu-item" href="#schedule">
+        <span>Schedule</span>
+      </a>
+      <a class="sub-menu-item current" href="#schedule">
+        <span>Schedule</span>
+      </a>
+      <a class="sub-menu-item" href="#schedule">
+        <span>Schedule</span>
+      </a>
+    </div>
+    <a class="menu-item" href="#clients">
+      <goa-icon size="small"  type="list" />
+      <span>Clients</span>
+    </a>
+    <a class="menu-item" href="#schedule">
+      <goa-icon size="small"  type="calendar" />
+      <span>Schedule</span>
+    </a>
+    <a class="menu-item" href="#">
+      <goa-icon size="small"  type="calendar" />
+      <span>Menu item</span>
+    </a>
+    <a class="menu-item" href="#">
+      <goa-icon size="small"  type="calendar" />
+      <span>Menu item</span>
+    </a>
   </nav>
 
   <nav class="secondary-menu">
-    <ul>
-      <li>
-        <a class="menu-item" href="#support">
-          <goa-icon size="small" type="help-circle" />
-          <span>Support</span>
-        </a>
-      </li>
-      <li>
-        <a class="menu-item" href="#settings">
-          <goa-icon size="small"  type="settings" />
-          <span>Settings</span>
-        </a>
-      </li>
-      <li>
-        <goa-popover relative="true" position="above">
-          This is a user menu.
-          <div slot="target" class="account-menu">
-            <div class="user-image"></div>
-            <div class="account-name">
-              <div class="user-name">Edna Mode</div>
-              <div class="user-email">edna.mode@example.com</div>
-            </div>
-            <goa-icon size="small" type="chevron-up"/>
-          </div>
-        </goa-popover>
-      </li>
-    </ul>
+    <a class="menu-item" href="#support">
+      <goa-icon size="small" type="help-circle" />
+      <span>Support</span>
+    </a>
+    <a class="menu-item" href="#settings">
+      <goa-icon size="small"  type="settings" />
+      <span>Settings</span>
+    </a>
+    <goa-popover relative="true" position="above">
+      This is a user menu.
+      <div slot="target" class="account-menu">
+        <div class="user-image"></div>
+        <div class="account-name">
+          <div class="user-name">Edna Mode</div>
+          <div class="user-email">edna.mode@example.com</div>
+        </div>
+        <goa-icon size="small" type="chevron-up"/>
+      </div>
+    </goa-popover>
     <div class="toggle">
       <goa-icon-button variant="color" size="small" icon={_open ? "chevron-back" : "chevron-forward"} onclick={handleToggleClick}></goa-icon-button>
     </div>
@@ -177,14 +100,8 @@
     height: 100vh;
   }
 
-  nav ul {
-    padding: 0;
-    margin: 0;
-    list-style-type: none;
-  }
-
   .side-menu.closed a>span,
-  .side-menu.closed .heading>h1,
+  .side-menu.closed .title,
   .side-menu.closed .account-name,
   .side-menu.closed .account-menu goa-icon {
     display: none;
@@ -223,7 +140,7 @@
     flex-shrink: 0;
   }
 
-  .heading h1 {
+  .heading .title {
     font-size: 14px;
     color: var(--goa-color-greyscale-900);
     line-height: 1.2;
@@ -244,7 +161,7 @@
   }
 
   .side-menu.open .main-menu {
-    padding: 12px;
+    padding: var(--goa-space-l) 12px 12px 12px;
   }
 
   .side-menu.open .secondary-menu {
@@ -333,13 +250,19 @@
     font: var(--goa-typography-body-m);
     padding: 4px 8px;
     text-decoration: none;
+    align-items: center;
+  }
+
+  .sub-menu-item {
+    padding: 2px 8px;
   }
 
   .side-menu.closed .menu-item {
     padding-left: 6px;
   }
 
-  .menu-item.current {
+  .menu-item.current,
+  .sub-menu-item.current {
     font-weight: bold;
     background: var(--goa-color-greyscale-100);
     border-radius: 8px;
@@ -354,9 +277,20 @@
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
   }
 
-  .sub-menu {
+  .side-menu.open .sub-menu {
     border-left: 4px solid var(--goa-color-greyscale-100);
-    margin-left: 20px;
-    margin-top: 2px;
+    margin-left: 16px;
+    margin-top: 8px;
+    padding-left: 16px;
+  }
+
+  .side-menu.closed .sub-menu {
+    display: none;
+  }
+
+  goa-icon {
+    background: var(--goa-color-greyscale-100);
+    border-radius: 64px;
+    height: 20px;
   }
 </style>
